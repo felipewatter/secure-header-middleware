@@ -1,5 +1,9 @@
 # 🛡️ Secure Header Middleware
 
+![GitHub release](https://img.shields.io/github/v/release/felipewatter/secure-header-middleware)
+![GitHub](https://img.shields.io/github/license/felipewatter/secure-header-middleware)
+![GitHub language count](https://img.shields.io/github/languages/count/felipewatter/secure-header-middleware)
+
 A lightweight and configurable Express middleware to automatically add secure HTTP headers to your APIs.
 
 ## 📋 Features
