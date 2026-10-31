@@ -3,14 +3,12 @@ import secureHeaders from '../src';
 
 const app = express();
 
+// Enable trust proxy ONLY for known TLS reverse proxies.
+// app.set('trust proxy', 'loopback');
 app.use(secureHeaders({
-  contentSecurityPolicy: "default-src 'self';"
+  contentSecurityPolicy: "default-src 'self'; object-src 'none'",
+  permissionsPolicy: 'camera=(), microphone=()',
 }));
 
-app.get('/', (req, res) => {
-  res.send('Hello from a secure API! 🔒');
-});
-
-app.listen(3000, () => {
-  console.log('Server is running at http://localhost:3000');
-});
+app.get('/', (_req, res) => res.send('Secure headers enabled'));
+app.listen(3000, () => console.log('Example on http://localhost:3000'));
