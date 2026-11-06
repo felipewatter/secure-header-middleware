@@ -9,7 +9,20 @@ if(original.private===true){
   requireInside(project,'dist/index.js');
   summary.push('Private application: no npm pack/install/publish attempted; built entry syntax verified on '+node);
 }else{
-  const meta=JSON.parse(cp.execFileSync('npm',['pack','--ignore-scripts','--json'],{encoding:'utf8',stdio:['ignore','pipe','pipe']}))[0];
+  const packOutput=cp.execFileSync('npm',['pack','--ignore-scripts','--json'],{encoding:'utf8',stdio:['ignore','pipe','pipe']});
+  // Some older npm versions emit package lifecycle logs before the JSON array.
+  // Accept only an actual JSON array with one package descriptor; never hide a
+  // broken tarball or a failed npm process.
+  let meta;
+  for (const match of packOutput.matchAll(/\[\s*\{/g)) {
+    try {
+      const parsed=JSON.parse(packOutput.slice(match.index).trim());
+      if(Array.isArray(parsed)&&parsed.length===1&&typeof parsed[0]?.filename==='string'){
+        meta=parsed[0];break;
+      }
+    } catch {}
+  }
+  if(!meta)fail('npm pack returned no usable JSON package metadata');
   if(!meta.filename || !meta.files?.length)fail('Empty or malformed npm pack result');
   const temp=fs.mkdtempSync(path.join(os.tmpdir(),'ts-consumer-'));
   try{
