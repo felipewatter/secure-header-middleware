@@ -1,6 +1,6 @@
 {
   "name": "secure-header-middleware",
-  "version": "0.2.0",
+  "version": "1.2.1",
   "description": "Express-compatible HTTP security headers middleware with safe HSTS and CSP configuration",
   "license": "MIT",
   "author": "Felipe Watter",
@@ -14,8 +14,14 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "README.md", "LICENSE"],
-  "engines": { "node": ">=22" },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "prepare": "npm run build",
@@ -25,5 +31,12 @@
   "devDependencies": {
     "typescript": "~7.0.2"
   },
-  "keywords": ["express", "security", "headers", "hsts", "csp", "typescript"]
+  "keywords": [
+    "express",
+    "security",
+    "headers",
+    "hsts",
+    "csp",
+    "typescript"
+  ]
 }

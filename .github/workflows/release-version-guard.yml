@@ -24,7 +24,7 @@ jobs:
         if: github.event_name == 'pull_request'
         shell: bash
         run: |
-          node scripts/check-release-version.cjs v0.2.0
+          node scripts/check-release-version.cjs v1.2.1
           if node scripts/check-release-version.cjs v1.2.0; then
             echo "ERROR: mismatched release tag was accepted"
             exit 1

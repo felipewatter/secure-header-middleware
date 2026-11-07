@@ -12,7 +12,7 @@ A [release `v1.2.0`](https://github.com/felipewatter/secure-header-middleware/re
 
 ## Validação local
 ```bash
-node scripts/check-release-version.cjs v0.2.0  # aceita na versão atual
+node scripts/check-release-version.cjs v1.2.1  # aceita na versão atual
 node scripts/check-release-version.cjs v1.2.0  # rejeita (divergência)
 ```
 
