@@ -122,3 +122,7 @@ Testes verificam o comportamento HTTP/HTTPS, cabeçalhos padrão, CSP, rejeiçã
 ## Responsabilidades e licença
 
 MIT — consulte [LICENSE](LICENSE). Contribuições em [CONTRIBUTING.md](CONTRIBUTING.md) e comunicação privada de falhas em [SECURITY.md](SECURITY.md).
+
+## Histórico de versionamento
+
+A tag GitHub `v1.2.0` (31/10/2026) corresponde historicamente a um commit cujo `package.json` declara `0.2.0`. **Esta divergência preexistente não foi corrigida por reescrita de tag ou release.** Para releases futuros, a política exige que a tag seja idêntica à versão no pacote e a Action verifica essa regra. Consulte [RELEASE_POLICY.md](RELEASE_POLICY.md). Não presuma que o pacote esteja publicado no npm.
