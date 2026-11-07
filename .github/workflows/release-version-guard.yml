@@ -1,0 +1,36 @@
+name: Release tag and package version consistency
+on:
+  pull_request:
+    paths:
+      - 'scripts/check-release-version.cjs'
+      - '.github/workflows/release-version-guard.yml'
+      - 'package.json'
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Test matching tag and reject historical mismatch
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: |
+          node scripts/check-release-version.cjs v0.2.0
+          if node scripts/check-release-version.cjs v1.2.0; then
+            echo "ERROR: mismatched release tag was accepted"
+            exit 1
+          fi
+      - name: Validate real release tag
+        if: github.event_name == 'push'
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node scripts/check-release-version.cjs "$RELEASE_TAG"
